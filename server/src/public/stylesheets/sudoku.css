@@ -1,0 +1,500 @@
+/**********************************\
+--------- Sudoku App Styles --------
+
+  Contents:
+  - Global definitions
+  - Modules
+
+  Each module may have its own
+  variables, mixins, animations and
+  media queries.
+
+  This is the convention followed
+  in structuring rules
+
+  // ==================
+  // Foo
+  // ==================
+
+  // Variables (Variables of Foo)
+  [...]
+
+  // Lorem (Lorem of foo)
+  [...]
+
+  // ==================
+  // Bar
+  // ==================
+
+  [...]
+
+\**********************************/
+
+// ==================
+// Global
+// ==================
+
+// Fonts
+@font-face {
+  src: url("http://enes.in/GillSansTr-LightNr.otf");
+  font-family: Gill;
+  font-weight: 100
+}
+
+@font-face {
+  src: url("http://enes.in/GillSansTr-Normal.otf");
+  font-family: Gill;
+  font-weight: 300
+}
+
+@font-face {
+  src: url("http://enes.in/GillSansTr-Bold.otf");
+  font-family: Gill;
+  font-weight: 600
+}
+
+@font-face {
+  src: url("http://enes.in/GillSansTr-ExtraBold.otf");
+  font-family: Gill;
+  font-weight: 700
+}
+
+@font-face {
+  src: url("http://enes.in/GillSansTr-UltraBold.otf");
+  font-family: Gill;
+  font-weight: 900
+}
+
+html, body {
+  width: 100%;
+  height: 100%
+}
+
+body {
+  margin: 0;
+  background: #f0f0f0
+}
+
+// Variables
+$g-transition-duration: .2s;
+$g-breakpoint-xs: 260px;
+$g-breakpoint-sm: 420px;
+$g-breakpoint-md: 615px;
+
+// Responsive
+@media (max-width: $g-breakpoint-xs) {
+  .show-on-sm { display: none; }
+  .show-on-md { display: none; }
+  .show-on-lg { display: none; }
+  .show-on-xs { display: block; }
+}
+
+@media (max-width: $g-breakpoint-sm) {
+  .show-on-xs { display: none; }
+  .show-on-md { display: none; }
+  .show-on-lg { display: none; }
+  .show-on-sm { display: block; }
+}
+
+@media (min-width: $g-breakpoint-sm + 1)
+  and (max-width: $g-breakpoint-md) {
+  .show-on-xs { display: none; }
+  .show-on-sm { display: none; }
+  .show-on-lg { display: none; }
+  .show-on-md { display: block; }
+}
+
+@media (min-width: $g-breakpoint-md) {
+  .show-on-xs { display: none; }
+  .show-on-sm { display: none; }
+  .show-on-md { display: none; }
+  .show-on-lg { display: block; }
+}
+
+// Animations
+@keyframes progress {
+    0%   {
+      box-shadow: none;
+    }
+    25%  {
+      box-shadow: 2px -2px 0 1px;
+    }
+    50%  {
+      box-shadow: 2px -2px 0 1px,
+                  7px -2px 0 1px;
+    }
+    100% {
+      box-shadow: 2px -2px 0 1px,
+                  7px -2px 0 1px,
+                  12px -2px 0 1px;
+    }
+}
+
+.fr { float: right; }
+.fl { float: left; }
+
+// ==================
+// Modules
+// ==================
+
+// ==================
+// CTA Button
+// ==================
+
+// Variables
+$button-primary-color: lighten(desaturate(blue, 35%), 5%);
+$button-secondary-color: lighten(desaturate(red, 35%), 5%);
+$button-tertiary-color: #2ECC40;
+$button-neutral-color: #333;
+$button-disabled-color: #bbb;
+$button-border-radius: 3px;
+
+// Mixins
+@mixin button-base(
+  $font-size,
+  $margin,
+  $padding,
+  $loading-padding-right) {
+    .button {
+      padding: $padding;
+      font-size: $font-size;
+
+      &:not(:last-of-type) {
+        margin-right: $margin;
+      }
+
+      &--loading {
+        padding-right: $loading-padding-right
+      }
+    }
+}
+
+// Responsive
+@media (max-width: $g-breakpoint-xs) {
+  @include button-base(
+    .6em,
+    .15em,
+    .25em .5em,
+    1.5em);
+}
+
+@media (min-width: $g-breakpoint-xs + 1)
+  and (max-width: $g-breakpoint-sm) {
+  @include button-base(
+    .75em,
+    .25em,
+    .25em .5em .15em,
+    1.5em);
+}
+
+@media (min-width: $g-breakpoint-sm + 1)
+  and (max-width: $g-breakpoint-md) {
+  @include button-base(
+    .9em,
+    .5em,
+    .5em .75em .4em,
+    1.5em);
+}
+
+@media (min-width: $g-breakpoint-md) {
+  @include button-base(
+    1em,
+    .75em,
+    .75em 1em .6em,
+    1.5em);
+}
+
+// Component
+.button {
+  border: 1px solid;
+  font-weight: normal;
+  border-radius: $button-border-radius;
+  background: none;
+  box-shadow: none;
+  transition: all $g-transition-duration;
+
+  &--primary {
+    color: $button-primary-color;
+    font-weight: 600;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $button-primary-color;
+      background: $button-primary-color;
+    }
+
+    &:focus {
+      box-shadow: 0 0 5px $button-primary-color;
+    }
+  }
+
+  &--secondary {
+    color: $button-secondary-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $button-secondary-color;
+      background: $button-secondary-color;
+    }
+
+    &:focus {
+      box-shadow: 0 0 5px $button-secondary-color;
+    }
+  }
+
+  &--tertiary {
+    color: #fff;
+    border-color: $button-tertiary-color;
+    background: $button-tertiary-color;
+  }
+
+  &--neutral {
+    color: $button-neutral-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $button-neutral-color;
+      background: $button-neutral-color;
+    }
+
+    &:focus {
+      box-shadow: 0 0 5px $button-neutral-color;
+    }
+  }
+
+  &--compound {
+    border-radius: 0;
+    border-right: none;
+
+    &-first {
+      border-bottom-left-radius: $button-border-radius;
+      border-top-left-radius: $button-border-radius;
+    }
+
+    &-last {
+      border-bottom-right-radius: $button-border-radius;
+      border-top-right-radius: $button-border-radius;
+      border-right: 1px solid;
+    }
+  }
+
+  &--muted {
+    pointer-events: none;
+  }
+
+  &--disabled {
+    border-color: $button-disabled-color;
+    color: $button-disabled-color;
+    pointer-events: none;
+  }
+
+  &--loading {
+    &-text::after {
+      display: inline-block;
+      width: 1px;
+      height: 1px;
+      content: '';
+      box-shadow: 2px -2px 1px 0;
+      animation: progress 1s infinite;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: inset 0 -2px 10px rgba(#000, .4);
+  }
+}
+
+// ==================
+// Feedback Messages
+// ==================
+
+// Component
+.message {
+  font-size: .9em;
+  padding: 2em;
+  margin: 0;
+  border-radius: 3px;
+  color: rgba(black, .75);
+
+  &--busy {
+    background: rgba(blue, .1)
+  }
+
+  &--fail {
+    background: rgba(red, .1)
+  }
+}
+
+// ==================
+// Sudoku Table
+// ==================
+
+// Variables
+$sudoku-color: #444;
+
+// Mixins
+@mixin sudoku-base(
+  $thin-border,
+  $thick-border,
+  $cell-size,
+  $font-size,
+  $title-size,
+  $padding-around,
+  $header-padding
+  ) {
+  .sudoku {
+    margin: 0 auto;
+    padding-top: $padding-around;
+    padding-bottom: $padding-around;
+
+    &__header {
+      padding-bottom: $header-padding
+    }
+
+    &__title {
+      font-size: $title-size
+    }
+
+    &__table {
+      font-size: $font-size;
+      border-top: $thick-border;
+      border-left: $thick-border;
+      border-collapse: collapse;
+
+      &-row {
+        border-bottom: $thin-border;
+        border-right: $thick-border;
+
+        &--separator {
+          border-bottom: $thick-border;
+        }
+      }
+
+      &-cell {
+        width: $cell-size;
+        height: $cell-size;
+        border-right: $thin-border;
+
+        &--separator {
+          border-right: $thick-border;
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: $g-breakpoint-xs) {
+  @include sudoku-base(
+    1px solid $sudoku-color,
+    2px solid $sudoku-color,
+    16px, .9em,  1em, .5em, .6em);
+
+  .sudoku {
+    max-width: calc(#{$g-breakpoint-xs} / 1.5);
+    min-width: calc(#{$g-breakpoint-xs} / 2);
+  }
+}
+
+@media (min-width: $g-breakpoint-xs + 1)
+  and  (max-width: $g-breakpoint-sm) {
+  @include sudoku-base(
+    1px solid $sudoku-color,
+    3px solid $sudoku-color,
+    32px, 1.2em, 1.2em, 1em, .9em);
+
+  .sudoku {
+    width: $g-breakpoint-xs;
+  }
+}
+
+@media (min-width: $g-breakpoint-sm + 1)
+  and (max-width: $g-breakpoint-md) {
+  @include sudoku-base(
+    1px solid $sudoku-color,
+    4px solid $sudoku-color,
+    48px, 1.5em, 1.5em, 2em, 1.3em);
+
+  .sudoku {
+    width: $g-breakpoint-sm
+  }
+}
+
+@media (min-width: $g-breakpoint-md) {
+  @include sudoku-base(
+    2px solid $sudoku-color,
+    6px solid $sudoku-color,
+    64px, 1.75em, 2em, 3em, 1.618em);
+
+  .sudoku {
+    width: $g-breakpoint-md
+  }
+}
+
+// Component
+.sudoku {
+  color: $sudoku-color;
+
+  &__header {
+    font-family: Gill, sans-serif;
+  }
+
+  &__title {
+    font-weight: 600
+  }
+
+  &__description {
+    max-width: 640px;
+    line-height: 1.4;
+    font-weight: 100
+  }
+
+  &__table {
+    background: #fff;
+
+    &-row {}
+
+    &-cell {
+      overflow: hidden;
+      text-align: center;
+      transition: all .25s;
+
+      &--editable {
+        color: desaturate(blue, 25);
+
+        &:focus {
+          background: rgba(blue, .1);
+          outline: none;
+        }
+      }
+
+      &--error {
+        color: red;
+        background: #fdd;
+      }
+
+      &--editable-error {
+        text-shadow: 0 0 15px;
+
+        &:focus {
+          color: #eee;
+          background: #f45;
+        }
+      }
+    }
+
+  }
+}

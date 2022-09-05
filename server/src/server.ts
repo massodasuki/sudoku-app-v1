@@ -17,13 +17,14 @@ import { CustomError } from '@shared/errors';
 import  serverConfig   from './databases/config';
 
 const app = express();
+var cors = require("cors");
 
 
 
 /************************************************************************************
  *                              Set basic express settings
  ***********************************************************************************/
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser(cookieProps.secret));
@@ -93,6 +94,10 @@ app.get('/chat', (req: Request, res: Response) => {
     } else {
         return res.sendFile('chat.html', {root: viewsDir});
     }
+});
+
+app.get('/sudoku', (req: Request, res: Response) => {
+  return res.sendFile('sudoku.html', {root: viewsDir});
 });
 
 

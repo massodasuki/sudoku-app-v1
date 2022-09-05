@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+table {
+  border-collapse: collapse;
+  font-family: Calibri,
+  sans-serif;
+}
+
+colgroup, tbody { border: solid medium;
+}
+
+
+td { border: solid thin;
+     height: 1.4em;
+     width: 1.4em;
+     text-align: center;
+     padding: 0;
+}
