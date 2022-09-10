@@ -13,8 +13,8 @@ const axios = require('axios').default;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#d11fb6",
-    color: "white",
+    backgroundColor: "#ffff",
+    color: "black",
   },
   section: {
     margin: 10,
@@ -25,33 +25,97 @@ const styles = StyleSheet.create({
     height: window.innerHeight,
   },
   table: {
-    width: "auto",
     borderStyle: "solid",
   },
   tableRow: {
     margin: "auto",
-    flexDirection: "row"
+    flexDirection: "row",
+  },
+  tableRowTop: {
+    margin: "auto",
+    flexDirection: "row",
+    borderTopWidth:1
+  },
+  tableRowBottom: {
+    margin: "auto",
+    flexDirection: "row",
+    borderBottomWidth:1
   },
   tableCol: {
-    height:20,
-    width:20,
+    height:30,
+    width:30,
     textAlign: "justify",
     borderStyle: "solid",
-    borderWidth: 1,
+    borderWidth: 0.1,
     padding:0
-
+  },
+  tableColBottom: {
+    height:30,
+    width:30,
+    textAlign: "justify",
+    borderStyle: "solid",
+    borderWidth: 0.1,
+    borderBottomWidth:1,
+    padding:0
+  },
+  tableColLeft: {
+    height:30,
+    width:30,
+    textAlign: "justify",
+    borderStyle: "solid",
+    borderWidth: 0.1,
+    borderLeftWidth:1,
+    padding:0
+  },
+  tableColRight: {
+    height:30,
+    width:30,
+    textAlign: "justify",
+    borderStyle: "solid",
+    borderWidth: 0.1,
+    borderRightWidth:1,
+    padding:0
   },
   tableCell: {
     margin: "auto",
     marginTop: 5,
-    fontSize: 10
-  }
+    fontSize: 11
+  },
+  tableBody:{
+    borderStyle: "solid",
+    borderWidth: 1.4,
+  },
+  title:{
+    textAlign: "center",
+    marginTop: 200,
+    marginRight: 20,
+    marginBottom: 20,
+    marginLeft: 20,
+    paddingTop: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+  },
+  // table: {
+  //   borderCollapse: "collapse",
+  //   fontFamily: "Calibri",
+  // },
+  tbody: {
+     border: "solid medium"
+   },
+   colgroup: {
+      border: "solid medium",
+    },
+  td: { border: "solid thin",
+      height: 1.4,
+      width: 1.4,
+      textAlign: "center",
+      padding: 0,
+    }
 });
 
+
 const b = 0;
-
-
-
 
 class BasicDocument extends React.Component <{}, { boardsPuzzle: any [][], boardsAnswer: any [][]}>{
   constructor(props: {}){
@@ -91,32 +155,183 @@ class BasicDocument extends React.Component <{}, { boardsPuzzle: any [][], board
  render(){
 
 
+
    var puzzle = this.state.boardsPuzzle.map(function(p, i){
-   return (
+     if (i === 0) {
+     return(
+       <View style={styles.tableRowTop}>
+       {p.map(function(k, i) {
+         if (i === 0 || i === 3 || i === 6) {
+           return (
+             <View style={styles.tableColLeft}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+         else if (i === 8) {
+           return (
+             <View style={styles.tableColRight}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+         else {
+           return (
+             <View style={styles.tableCol}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+       })}
+       </View>
+         );
+     } else if (i === 2 || i === 5 ||  i === 8) {
+     return (
+       <View style={styles.tableRowBottom}>
+         {p.map(function(k, i) {
+           if (i === 0 || i === 3 || i === 6) {
+             return (
+               <View style={styles.tableColLeft}>
+                 <Text style={styles.tableCell}>{k}</Text>
+               </View>
+             );
+           }
+           else if (i === 8) {
+             return (
+               <View style={styles.tableColRight}>
+                 <Text style={styles.tableCell}>{k}</Text>
+               </View>
+             );
+           }
+           else {
+             return (
+               <View style={styles.tableCol}>
+                 <Text style={styles.tableCell}>{k}</Text>
+               </View>
+             );
+           }
+         })}
+       </View>
+         );
+     } else {
+     return (
        <View style={styles.tableRow}>
        {p.map(function(k, i) {
+         if (i === 0 || i === 3 || i === 6) {
            return (
-                 <View style={styles.tableCol}>
-                   <Text style={styles.tableCell}>{k}</Text>
-                 </View>
-               );
-           })}
+             <View style={styles.tableColLeft}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+         else if (i === 8) {
+           return (
+             <View style={styles.tableColRight}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+         else {
+           return (
+             <View style={styles.tableCol}>
+               <Text style={styles.tableCell}>{k}</Text>
+             </View>
+           );
+         }
+       })}
        </View>
-       );
+         );
+       }
    });
 
+
   var answer = this.state.boardsAnswer.map(function(p, i){
-  return (
-      <View style={styles.tableRow}>
-      {p.map(function(k, i) {
-          return (
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{k}</Text>
-                </View>
-              );
-          })}
-      </View>
+  if (i === 0) {
+  return(
+    <View style={styles.tableRowTop}>
+    {p.map(function(k, i) {
+      if (i === 0 || i === 3 || i === 6) {
+        return (
+          <View style={styles.tableColLeft}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+      else if (i === 8) {
+        return (
+          <View style={styles.tableColRight}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+      else {
+        return (
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+    })}
+    </View>
       );
+  } else if (i === 2 || i === 5 ||  i === 8) {
+  return (
+    <View style={styles.tableRowBottom}>
+      {p.map(function(k, i) {
+        if (i === 0 || i === 3 || i === 6) {
+          return (
+            <View style={styles.tableColLeft}>
+              <Text style={styles.tableCell}>{k}</Text>
+            </View>
+          );
+        }
+        else if (i === 8) {
+          return (
+            <View style={styles.tableColRight}>
+              <Text style={styles.tableCell}>{k}</Text>
+            </View>
+          );
+        }
+        else {
+          return (
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>{k}</Text>
+            </View>
+          );
+        }
+      })}
+    </View>
+      );
+  } else {
+  return (
+    <View style={styles.tableRow}>
+    {p.map(function(k, i) {
+      if (i === 0 || i === 3 || i === 6) {
+        return (
+          <View style={styles.tableColLeft}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+      else if (i === 8) {
+        return (
+          <View style={styles.tableColRight}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+      else {
+        return (
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>{k}</Text>
+          </View>
+        );
+      }
+    })}
+    </View>
+      );
+    }
+
   });
 
 
@@ -127,15 +342,19 @@ class BasicDocument extends React.Component <{}, { boardsPuzzle: any [][], board
       <Document>
         {/*render a single page*/}
         <Page size="A4" style={styles.page}>
+        <Text style={styles.title}>Sudoku of the day</Text>
           <View style={styles.table}>
           {puzzle}
           </View>
         </Page>
+
         <Page size="A4" style={styles.page}>
+        <Text style={styles.title}>Answer</Text>
           <View style={styles.table}>
           {answer}
           </View>
         </Page>
+
       </Document>
     </PDFViewer>
   );

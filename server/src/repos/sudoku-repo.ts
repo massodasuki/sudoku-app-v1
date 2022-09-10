@@ -243,7 +243,15 @@ async function generatesValidSudokuBoard (): Promise<any> {
 }
 
 async function generatesSudokuPuzzle (): Promise<any> {
-   let validSudokuBoard = await generatesValidSudokuBoard();
+
+   let validSudokuBoard;
+   let valid = false;
+   while (valid == false ){
+     validSudokuBoard = await generatesValidSudokuBoard();
+     if (validSudokuBoard != false){
+        valid = true;
+     }
+   }
    let sudokuPuzzle = removeBoardByPercent(validSudokuBoard, 50)
    return sudokuPuzzle;
 }
