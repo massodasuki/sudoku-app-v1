@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
-
-import { useForm } from "./userForm";
-
 const axios = require('axios').default;
 
 function Home() {
@@ -30,33 +27,31 @@ function Home() {
         // const responsed = true;
         // this.setState({sudoku, responsed});
         // navigate('/topics', state: {});
-        navigate('/topics', { state: { data: sudoku } })
+        navigate('/sudoku', { state: { data: sudoku } })
 
       })
 
   };
 
   // getting the event handlers from our custom hook
-  const { onChange, onSubmit, values } = useForm(
-    loginUserCallback,
-    initialState
-  );
-
-  // a submit function that will execute upon form submission
-  async function loginUserCallback() {
+  function handleClick(e: { preventDefault: () => void; }): void {
+    e.preventDefault();
+    console.log('Clicked');
     navigateToHome();
-    // send "values" to database
   }
+  // a submit function that will execute upon form submission
+  // async function loginUserCallback() {
+  //   navigateToHome();
+  //   // send "values" to database
+  // }
 
   return (
     // don't mind this ugly form :P
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleClick}>
       <div>
         <input
           name='page'
           id='page'
-          onChange={onChange}
-          required
         />
 
         <button type='submit'>Login</button>

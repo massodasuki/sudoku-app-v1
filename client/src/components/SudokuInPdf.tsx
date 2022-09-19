@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
 });
 
 
-function Topics() {
+function SudokuInPdf() {
   const [sudoku, setSudoku] = useState(boards)
   const location = useLocation();
 
@@ -137,9 +137,6 @@ function Topics() {
     setSudoku(location.state.data)
   });
 
-
-  var count = 0;
-  var set = 2;
   let totalPage = sudoku.length;
   let puzzleIndex = totalPage / 2;
   let sudokuPoW = sudoku.map(function(j, k) {
@@ -246,22 +243,6 @@ function Topics() {
     </Page>)
   })
 
-  // let test2 = boards.map((j) => {
-  //   return (
-  //     j.map((l) => {
-  //       return (
-  //         l.map((o) => {
-  //           return (
-  //             <View style={styles.tableCol}>
-  //               <Text style={styles.tableCell}>{o}</Text>
-  //             </View>
-  //           );
-  //         })
-  //       )
-  //     })
-  //   )
-  // })
-
   return (
     <PDFViewer style={styles.viewer}>
       {/* Start of the document*/}
@@ -277,4 +258,4 @@ function Topics() {
 
 
 
-export default Topics;
+export default SudokuInPdf;
