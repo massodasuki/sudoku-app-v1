@@ -9,6 +9,7 @@ const { OK } = StatusCodes;
 // Paths
 export const p = {
     getAll: '/all',
+    createBook:'/book/:numOfChapter',
     getPuz: '/puzzle',
     getAns: '/answer',
     delete: '/delete/:id',
@@ -22,6 +23,14 @@ router.get(p.getAll, async (_: Request, res: Response) => {
     // console.log(sudoku)
     return res.status(OK).json({sudoku});
 });
+
+router.get(p.createBook, async (req: Request, res: Response) => {
+    const { numOfChapter } = req.params;
+    const sudoku = await sudokuService.getBundleSudokuPuzzleWithAnswer(numOfChapter);
+    // console.log(sudoku)
+    return res.status(OK).json({sudoku});
+});
+
 
 router.get(p.getPuz, async (_: Request, res: Response) => {
     const sudoku = await sudokuService.getSudokuPuzzle();

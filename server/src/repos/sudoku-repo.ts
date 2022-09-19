@@ -267,9 +267,26 @@ async function generatesSudokuPuzzleWithAnswer (): Promise<any> {
    return data;
 }
 
+async function generatesBundleSudokuPuzzleWithAnswer(numOfPuzzles: number): Promise<any> {
+   var book : any = [];
+
+   var count = 0;
+   while (count < numOfPuzzles){
+     var chapter : any = {};
+     let sudokuPuzzle = await generatesSudokuPuzzle()
+     let sudokuBoards = await solve({ board: sudokuPuzzle });
+     chapter.answer = sudokuBoards;
+     chapter.puzzle = sudokuPuzzle;
+     book.push(chapter)
+     count++;
+   }
+   return book;
+}
+
 // Export default
 export default {
     generatesSudokuPuzzleWithAnswer,
+    generatesBundleSudokuPuzzleWithAnswer,
     generatesSudokuPuzzle,
     generatesValidSudokuBoard
 } as const;
